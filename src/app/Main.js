@@ -8,7 +8,14 @@ import Dialog from 'material-ui/Dialog';
 import {deepOrange500} from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DatePicker from 'material-ui/DatePicker';
+import areIntlLocalesSupported from 'intl-locales-supported';
+//
+// import {blue500, red500, greenA200} from 'material-ui/styles/colors';
+// import SvgIcon from 'material-ui/SvgIcon';
 
 const styles = {
   container: {
@@ -17,11 +24,47 @@ const styles = {
   },
 };
 
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500,
-  },
-});
+
+
+function getLang() {
+  let DateTimeFormat;
+
+  /**
+   * Use the native Intl.DateTimeFormat if available, or a polyfill if not.
+   */
+  if (areIntlLocalesSupported(['da'])) {
+    DateTimeFormat = global.Intl.DateTimeFormat;
+  } else {
+    const IntlPolyfill = require('intl');
+    DateTimeFormat = IntlPolyfill.DateTimeFormat;
+    require('intl/locale-data/jsonp/da');
+  }
+
+  return DateTimeFormat
+}
+
+const DatePickerExampleSimple = (a) => (
+  <div>
+    <DatePicker hintText="local language Portrait Dialog"
+      DateTimeFormat={getLang()}
+      locale="fr" />
+    <DatePicker hintText="Default language Landscape Dialog" mode="landscape" />
+    <DatePicker hintText="Dialog Disabled" disabled={true}
+       />
+  </div>
+);
+
+const HelloWorld = () => (
+    <b>{parseInt(Math.random()*100000).toString().split("").join(" - ")}</b>
+);
+
+// const muiTheme = getMuiTheme({
+//   palette: {
+//     accent1Color: deepOrange500,
+//   },
+// });
+const muiTheme = getMuiTheme(lightBaseTheme);
+
 
 class Main extends Component {
   constructor(props, context) {
@@ -65,7 +108,9 @@ class Main extends Component {
             actions={standardActions}
             onRequestClose={this.handleRequestClose}
           >
-            1-2-3-4-5
+            <HelloWorld />
+            <DatePickerExampleSimple />
+
           </Dialog>
           <h1>Material-UI</h1>
           <h2>example project</h2>
@@ -79,5 +124,7 @@ class Main extends Component {
     );
   }
 }
+
+
 
 export default Main;
