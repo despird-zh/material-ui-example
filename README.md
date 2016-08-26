@@ -1,4 +1,6 @@
-# [Material-UI](http://callemall.github.io/material-ui/) - Example Webpack Project
+# MODIFIED VERSION OF: [Material-UI](http://callemall.github.io/material-ui/) - Example Webpack Project
+
+I have created a Pen on CodePen where you can see [DEMO of this version running](http://codepen.io/netsi1964/details/mEkNgx).
 
 This is an example project that uses [Material-UI](http://callemall.github.io/material-ui/).
 
