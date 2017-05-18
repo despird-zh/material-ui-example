@@ -25,7 +25,6 @@ const styles = {
 };
 
 
-
 function getLang() {
   let DateTimeFormat;
 
